@@ -5,6 +5,7 @@ from .models import Book, Review
 from .serializers import BookSerializer, ReviewSerializer
 from django.db.models import Prefetch, Avg
 class BookViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Book.objects.only('id', 'title', 'author', 'description', 'price')\
         .prefetch_related(
             Prefetch('reviews', queryset=Review.objects.select_related('user').only('rating', 'comment', 'user__username'))
@@ -12,7 +13,7 @@ class BookViewSet(viewsets.ModelViewSet):
             avg_rating=Avg('reviews__rating')
         )
     serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+   
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

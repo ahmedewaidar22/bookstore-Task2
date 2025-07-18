@@ -10,7 +10,7 @@ User = get_user_model()
 # Your custom RegisterSerializer
 class CustomRegisterSerializer(RegisterSerializer):
 
-    _has_phone_field = False # Explicitly tell allauth that this serializer does NOT have a phone field
+    _has_phone_field = False 
 
 
 
@@ -21,16 +21,16 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email')
-        read_only_fields = ('email',) # Often you don't want email to be changeable directly here
+        read_only_fields = ('email',) 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    user = CurrentUserSerializer(read_only=True) # Use the simpler UserSerializer
+    user = CurrentUserSerializer(read_only=True) 
     class Meta:
         model = Review
         fields = '__all__'
 
 class BookSerializer(serializers.ModelSerializer):
-    reviews = ReviewSerializer(many=True, read_only=True)
+    # reviews = ReviewSerializer(many=True, read_only=True)
     average_rating = serializers.SerializerMethodField()
     class Meta:
         model = Book
