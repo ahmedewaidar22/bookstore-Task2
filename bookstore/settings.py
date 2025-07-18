@@ -96,6 +96,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated', 
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,  # Default page size for pagination
 }
 
 REST_AUTH = {
@@ -104,10 +106,9 @@ REST_AUTH = {
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
     'JWT_AUTH_HTTPONLY': True,
     'JWT_AUTH_SAMESITE': 'Lax',
-    'SESSION_LOGIN': False, # Important: Set to False if primarily using JWT
-    # Override the default register serializer
-    'REGISTER_SERIALIZER': 'books.serializers.CustomRegisterSerializer', # Correct place
-    'USER_DETAILS_SERIALIZER': 'books.serializers.CurrentUserSerializer', # Add if you create this
+    'SESSION_LOGIN': False,
+    'REGISTER_SERIALIZER': 'books.serializers.CustomRegisterSerializer', 
+    'USER_DETAILS_SERIALIZER': 'books.serializers.CurrentUserSerializer',
 
 }
 

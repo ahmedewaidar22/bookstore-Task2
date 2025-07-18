@@ -36,9 +36,4 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = '__all__'
     def get_average_rating(self, obj):
-        reviews = obj.reviews.all()
-        if reviews:
-            # Use Django's Avg aggregation, ensuring it's from django.db.models
-            from django.db.models import Avg
-            return reviews.aggregate(avg_rating=Avg('rating'))['avg_rating']
-        return 0
+        return getattr(obj, 'avg_rating', 0) or 0
