@@ -11,7 +11,7 @@ A Django REST Framework–based backend application for a virtual bookstore, whe
 - 🧾 Users can submit one review per book (with rating 1–5)
 - 👀 View other users' reviews on each book
 - 📊 Average rating calculation per book
-- ✅ Clean, secure, and optimized API with proper query handling (no N+1 problem)
+- ✅ Clean, secure, and optimized API with proper query handling (no N+1 problem & Ratelimit)
 
 ---
 
